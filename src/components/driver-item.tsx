@@ -21,20 +21,40 @@ interface DriverItemProps {
 }
 
 function WeightIndicator({ weight }: { weight: number }) {
-  const totalIcons = Math.floor(weight / 10)
-  const icons = []
-
-  for (let i = 0; i < 4; i++) {
-    if (i < Math.floor(totalIcons)) {
-      icons.push(<Circle key={i} className="h-4 w-4 fill-current" />)
-    } else if (i === Math.floor(totalIcons) && weight > 0) {
-      icons.push(<CircleDashed key={i} className="h-4 w-4" />)
+  const getCircles = () => {
+    switch (weight) {
+      case 0:
+        return Array(4).fill(<CircleDashed className="h-4 w-4" />)
+      case 10:
+        return [
+          <Circle key="1" className="h-4 w-4 fill-current" />,
+          ...Array(3).fill(<CircleDashed className="h-4 w-4" />)
+        ]
+      case 20:
+        return [
+          <Circle key="1" className="h-4 w-4 fill-current" />,
+          <Circle key="2" className="h-4 w-4 fill-current" />,
+          ...Array(2).fill(<CircleDashed className="h-4 w-4" />)
+        ]
+      case 30:
+        return [
+          <Circle key="1" className="h-4 w-4 fill-current" />,
+          <Circle key="2" className="h-4 w-4 fill-current" />,
+          <Circle key="3" className="h-4 w-4 fill-current" />,
+          <CircleDashed className="h-4 w-4" />
+        ]
+      case 40:
+        return Array(4).fill(<Circle className="h-4 w-4 fill-current" />)
+      default:
+        return Array(4).fill(<CircleDashed className="h-4 w-4" />)
     }
   }
 
   return (
     <div className="flex items-center space-x-0.5">
-      {icons}
+      {getCircles().map((circle, index) => (
+        <div key={index}>{circle}</div>
+      ))}
     </div>
   )
 }
