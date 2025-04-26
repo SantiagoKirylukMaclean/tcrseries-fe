@@ -218,8 +218,8 @@ export default function SimulatePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
-        <div>
+      <div className="flex gap-20 max-w-[1400px] mx-auto">
+        <div className="min-w-[320px]">
           <h2 className="text-xl font-semibold mb-4 text-center">Current Race</h2>
           <div className="space-y-3">
             <DndContext
@@ -239,25 +239,29 @@ export default function SimulatePage() {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
-          <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
-            {drivers.map((driver, index) => (
-              <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
-                <FutureRaceItem driver={driver} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="border-l border-white/10 h-auto" />
 
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
-          <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
-            {drivers.map((driver, index) => (
-              <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
-                <ChampionshipItem driver={driver} />
-              </div>
-            ))}
+        <div className="flex-1 grid grid-cols-2 gap-12">
+          <div className="min-w-[320px]">
+            <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
+            <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+              {drivers.map((driver, index) => (
+                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                  <FutureRaceItem driver={driver} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="min-w-[320px]">
+            <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
+            <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+              {drivers.map((driver, index) => (
+                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                  <ChampionshipItem driver={driver} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
