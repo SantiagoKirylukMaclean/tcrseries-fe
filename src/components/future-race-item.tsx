@@ -1,5 +1,7 @@
 "use client"
 
+import { Circle, CircleDashed } from "lucide-react"
+
 interface TeamColors {
   primary: string
   secondary: string
@@ -14,10 +16,50 @@ interface Driver {
   qualyPoints: number
   race1Points: number
   race2Points: number
+  weight: number
 }
 
 interface FutureRaceItemProps {
   driver: Driver
+}
+
+function WeightIndicator({ weight }: { weight: number }) {
+  const getCircles = () => {
+    switch (weight) {
+      case 0:
+        return Array(4).fill(<CircleDashed className="h-3 w-3" />)
+      case 10:
+        return [
+          <Circle key="1" className="h-3 w-3 fill-current" />,
+          ...Array(3).fill(<CircleDashed className="h-3 w-3" />)
+        ]
+      case 20:
+        return [
+          <Circle key="1" className="h-3 w-3 fill-current" />,
+          <Circle key="2" className="h-3 w-3 fill-current" />,
+          ...Array(2).fill(<CircleDashed className="h-3 w-3" />)
+        ]
+      case 30:
+        return [
+          <Circle key="1" className="h-3 w-3 fill-current" />,
+          <Circle key="2" className="h-3 w-3 fill-current" />,
+          <Circle key="3" className="h-3 w-3 fill-current" />,
+          <CircleDashed className="h-3 w-3" />
+        ]
+      case 40:
+        return Array(4).fill(<Circle className="h-3 w-3 fill-current" />)
+      default:
+        return Array(4).fill(<CircleDashed className="h-3 w-3" />)
+    }
+  }
+
+  return (
+    <div className="flex flex-col space-y-0.5">
+      {getCircles().map((circle, index) => (
+        <div key={index}>{circle}</div>
+      ))}
+    </div>
+  )
 }
 
 export function FutureRaceItem({ driver }: FutureRaceItemProps) {
@@ -45,6 +87,10 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
           <div className="font-medium text-sm text-zinc-100">
             {driver.name[0]}. {driver.surname}
           </div>
+        </div>
+
+        <div className="mr-10">
+          <WeightIndicator weight={driver.weight} />
         </div>
 
         <div className="flex items-center space-x-6">
