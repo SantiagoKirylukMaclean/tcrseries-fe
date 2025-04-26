@@ -55,17 +55,17 @@ export function DriverItem({
         <GripVertical className="h-5 w-5 text-muted-foreground cursor-grab" />
       </div>
       
-      <div className="flex items-center space-x-2 min-w-[100px]">
+      <div className="flex h-7 w-[30px]">
         <div
-          className="w-3 h-6 rounded-sm"
+          className="w-1/3 h-full rounded-l-sm"
           style={{ backgroundColor: teamColors.primary }}
         />
         <div
-          className="w-3 h-6 rounded-sm"
+          className="w-1/3 h-full"
           style={{ backgroundColor: teamColors.secondary }}
         />
         <div
-          className="w-3 h-6 rounded-sm"
+          className="w-1/3 h-full rounded-r-sm"
           style={{ backgroundColor: teamColors.tertiary }}
         />
       </div>
