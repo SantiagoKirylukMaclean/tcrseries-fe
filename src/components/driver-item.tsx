@@ -92,8 +92,8 @@ export function DriverItem({
       <div className="w-8 text-lg font-bold">{position}</div>
       
       <div className="flex-1">
-        <div className="font-medium">
-          {name} {surname}
+        <div className="font-medium text-sm">
+          {name[0]}. {surname}
         </div>
       </div>
 

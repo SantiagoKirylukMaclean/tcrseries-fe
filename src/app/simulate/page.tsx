@@ -220,7 +220,7 @@ export default function SimulatePage() {
 
       <div className="grid grid-cols-3 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-4">Current Race</h2>
+          <h2 className="text-xl font-semibold mb-4 text-center">Current Race</h2>
           <div className="space-y-3">
             <DndContext
               sensors={sensors}
@@ -240,25 +240,23 @@ export default function SimulatePage() {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">Weights - Future Race</h2>
-          <div className="space-y-3">
-            {drivers.map((driver) => (
-              <FutureRaceItem
-                key={driver.id}
-                driver={driver}
-              />
+          <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
+          <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+            {drivers.map((driver, index) => (
+              <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                <FutureRaceItem driver={driver} />
+              </div>
             ))}
           </div>
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">Championship</h2>
-          <div className="space-y-3">
-            {drivers.map((driver) => (
-              <ChampionshipItem
-                key={driver.id}
-                driver={driver}
-              />
+          <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
+          <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+            {drivers.map((driver, index) => (
+              <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                <ChampionshipItem driver={driver} />
+              </div>
             ))}
           </div>
         </div>

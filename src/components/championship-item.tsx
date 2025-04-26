@@ -23,40 +23,45 @@ export function ChampionshipItem({ driver }: ChampionshipItemProps) {
   const totalPoints = driver.championshipPoints + driver.weekendPoints
 
   return (
-    <div className="flex items-center space-x-4 p-3 bg-card rounded-lg border">
-      <div className="flex h-7 w-[30px]">
+    <div className="flex h-[70px] bg-zinc-950">
+      <div className="flex flex-col w-[12px] py-2 ml-3">
         <div
-          className="w-1/3 h-full rounded-l-sm"
+          className="flex-1"
           style={{ backgroundColor: driver.teamColors.primary }}
         />
         <div
-          className="w-1/3 h-full"
+          className="flex-1"
           style={{ backgroundColor: driver.teamColors.secondary }}
         />
         <div
-          className="w-1/3 h-full rounded-r-sm"
+          className="flex-1"
           style={{ backgroundColor: driver.teamColors.tertiary }}
         />
       </div>
       
-      <div className="flex-1">
-        <div className="font-medium">
-          {driver.name} {driver.surname}
+      <div className="flex flex-1 items-center px-3">
+        <div className="flex-1">
+          <div className="font-medium text-sm text-zinc-100">
+            {driver.name[0]}. {driver.surname}
+          </div>
         </div>
-      </div>
 
-      <div className="flex space-x-4">
-        <div className="text-sm">
-          <span className="text-muted-foreground">Championship:</span>{" "}
-          <span className="font-medium">{driver.championshipPoints}</span>
-        </div>
-        <div className="text-sm">
-          <span className="text-muted-foreground">Weekend:</span>{" "}
-          <span className="font-medium">{driver.weekendPoints}</span>
-        </div>
-        <div className="text-sm font-semibold">
-          <span className="text-muted-foreground">Total:</span>{" "}
-          {totalPoints}
+        <div className="flex items-center space-x-6">
+          <div className="space-y-0.5 text-[11px]">
+            <div className="flex justify-end gap-3">
+              <span className="text-zinc-400">Championship</span>
+              <span className="text-zinc-300 w-4 text-right">{driver.championshipPoints}</span>
+            </div>
+            <div className="flex justify-end gap-3">
+              <span className="text-zinc-400">Weekend</span>
+              <span className="text-zinc-300 w-4 text-right">{driver.weekendPoints}</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
+            <div className="text-[10px] text-zinc-400">TOTAL</div>
+            <div className="text-lg font-bold text-zinc-100">{totalPoints}</div>
+          </div>
         </div>
       </div>
     </div>
