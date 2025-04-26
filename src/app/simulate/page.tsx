@@ -16,6 +16,8 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 import { DriverItem } from "@/components/driver-item"
+import { FutureRaceItem } from "@/components/future-race-item"
+import { ChampionshipItem } from "@/components/championship-item"
 
 const initialDrivers = [
   {
@@ -28,7 +30,11 @@ const initialDrivers = [
       secondary: "#1F377C",
       tertiary: "#F64342",
     },
-    weight: 20,
+    weight: 40,
+    qualyPoints: 15,
+    race1Points: 25,
+    race2Points: 18,
+    championshipPoints: 150,
   },
   {
     id: "2",
@@ -36,12 +42,15 @@ const initialDrivers = [
     name: "Néstor",
     surname: "Girolami",
     teamColors: {
-        primary: "#9DB8F0",
-        secondary: "#1F377C",
-        tertiary: "#F64342",
+      primary: "#9DB8F0",
+      secondary: "#1F377C",
+      tertiary: "#F64342",
     },
-    weight: 15,
-    dnf: true,
+    weight: 30,
+    qualyPoints: 12,
+    race1Points: 18,
+    race2Points: 25,
+    championshipPoints: 142,
   },
   {
     id: "3",
@@ -53,7 +62,11 @@ const initialDrivers = [
       secondary: "#FFFF00",
       tertiary: "#FF0000",
     },
-    weight: 25,
+    weight: 30,
+    qualyPoints: 10,
+    race1Points: 15,
+    race2Points: 15,
+    championshipPoints: 135,
   },
   {
     id: "4",
@@ -65,7 +78,11 @@ const initialDrivers = [
       secondary: "#00FFFF",
       tertiary: "#000000",
     },
-    weight: 18,
+    weight: 20,
+    qualyPoints: 8,
+    race1Points: 12,
+    race2Points: 12,
+    championshipPoints: 128,
   },
   {
     id: "5",
@@ -77,7 +94,11 @@ const initialDrivers = [
       secondary: "#FF0000",
       tertiary: "#00FF00",
     },
-    weight: 22,
+    weight: 10,
+    qualyPoints: 6,
+    race1Points: 10,
+    race2Points: 10,
+    championshipPoints: 120,
   },
   {
     id: "6",
@@ -89,7 +110,11 @@ const initialDrivers = [
       secondary: "#FF00FF",
       tertiary: "#FFFFFF",
     },
-    weight: 17,
+    weight: 0,
+    qualyPoints: 4,
+    race1Points: 8,
+    race2Points: 8,
+    championshipPoints: 115,
   },
   {
     id: "7",
@@ -101,7 +126,11 @@ const initialDrivers = [
       secondary: "#FFFF00",
       tertiary: "#00FFFF",
     },
-    weight: 30,
+    weight: 0,
+    qualyPoints: 2,
+    race1Points: 6,
+    race2Points: 6,
+    championshipPoints: 108,
   },
   {
     id: "8",
@@ -113,7 +142,11 @@ const initialDrivers = [
       secondary: "#0000FF",
       tertiary: "#FF00FF",
     },
-    weight: 12,
+    weight: 0,
+    qualyPoints: 1,
+    race1Points: 4,
+    race2Points: 4,
+    championshipPoints: 98,
   },
   {
     id: "9",
@@ -125,7 +158,11 @@ const initialDrivers = [
       secondary: "#00FF00",
       tertiary: "#0000FF",
     },
-    weight: 28,
+    weight: 0,
+    qualyPoints: 0,
+    race1Points: 2,
+    race2Points: 2,
+    championshipPoints: 85,
   },
   {
     id: "10",
@@ -137,7 +174,11 @@ const initialDrivers = [
       secondary: "#FF0000",
       tertiary: "#FFFF00",
     },
-    weight: 16,
+    weight: 0,
+    qualyPoints: 0,
+    race1Points: 1,
+    race2Points: 1,
+    championshipPoints: 75,
   },
 ]
 
@@ -172,26 +213,55 @@ export default function SimulatePage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold mb-6">Simulate Weekend</h1>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground mb-8">
           Drag and drop drivers to reorder the grid positions.
         </p>
       </div>
 
-      <div className="space-y-3">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={drivers.map((d) => d.id)}
-            strategy={verticalListSortingStrategy}
-          >
+      <div className="grid grid-cols-3 gap-8">
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Current Race</h2>
+          <div className="space-y-3">
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={drivers.map((d) => d.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {drivers.map((driver) => (
+                  <DriverItem key={driver.id} {...driver} />
+                ))}
+              </SortableContext>
+            </DndContext>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Weights - Future Race</h2>
+          <div className="space-y-3">
             {drivers.map((driver) => (
-              <DriverItem key={driver.id} {...driver} />
+              <FutureRaceItem
+                key={driver.id}
+                driver={driver}
+              />
             ))}
-          </SortableContext>
-        </DndContext>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Championship</h2>
+          <div className="space-y-3">
+            {drivers.map((driver) => (
+              <ChampionshipItem
+                key={driver.id}
+                driver={driver}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

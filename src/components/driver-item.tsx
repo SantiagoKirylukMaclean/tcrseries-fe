@@ -2,7 +2,7 @@
 
 import { CSS } from "@dnd-kit/utilities"
 import { useSortable } from "@dnd-kit/sortable"
-import { GripVertical } from "lucide-react"
+import { GripVertical, Circle, CircleDashed } from "lucide-react"
 
 interface TeamColors {
   primary: string
@@ -18,6 +18,25 @@ interface DriverItemProps {
   teamColors: TeamColors
   weight: number
   dnf?: boolean
+}
+
+function WeightIndicator({ weight }: { weight: number }) {
+  const totalIcons = Math.floor(weight / 10)
+  const icons = []
+
+  for (let i = 0; i < 4; i++) {
+    if (i < Math.floor(totalIcons)) {
+      icons.push(<Circle key={i} className="h-4 w-4 fill-current" />)
+    } else if (i === Math.floor(totalIcons) && weight > 0) {
+      icons.push(<CircleDashed key={i} className="h-4 w-4" />)
+    }
+  }
+
+  return (
+    <div className="flex items-center space-x-0.5">
+      {icons}
+    </div>
+  )
 }
 
 export function DriverItem({
@@ -84,10 +103,7 @@ export function DriverItem({
         </div>
       )}
 
-      <div className="flex items-center space-x-1">
-        <span className="font-medium">{weight}</span>
-        <span className="text-sm text-muted-foreground">kg</span>
-      </div>
+      <WeightIndicator weight={weight} />
     </div>
   )
 } 
