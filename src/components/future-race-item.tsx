@@ -1,6 +1,7 @@
 "use client"
 
 import { Circle, CircleDashed } from "lucide-react"
+import { RACE_POINTS } from "@/constants/points"
 
 interface TeamColors {
   primary: string
@@ -13,10 +14,12 @@ interface Driver {
   name: string
   surname: string
   teamColors: TeamColors
+  championshipPoints: number
   qualyPoints: number
   race1Points: number
-  race2Points: number
+  race2Points?: number
   weight: number
+  currentRacePosition: number
 }
 
 interface FutureRaceItemProps {
@@ -63,7 +66,9 @@ function WeightIndicator({ weight }: { weight: number }) {
 }
 
 export function FutureRaceItem({ driver }: FutureRaceItemProps) {
-  const totalPoints = driver.qualyPoints + driver.race1Points + driver.race2Points
+  const currentRacePoints = RACE_POINTS[driver.currentRacePosition] || 0
+  const weekendPoints = driver.qualyPoints + driver.race1Points + (driver.race2Points || 0) + currentRacePoints
+  const totalPoints = driver.championshipPoints + weekendPoints
 
   return (
     <div className="flex h-[70px] bg-zinc-950">
@@ -103,15 +108,27 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
               <span className="text-zinc-400">Race 1</span>
               <span className="text-zinc-300 w-4 text-right">{driver.race1Points}</span>
             </div>
+            {driver.race2Points !== undefined && (
+              <div className="flex justify-end gap-3">
+                <span className="text-zinc-400">Race 2</span>
+                <span className="text-zinc-300 w-4 text-right">{driver.race2Points}</span>
+              </div>
+            )}
             <div className="flex justify-end gap-3">
-              <span className="text-zinc-400">Race 2</span>
-              <span className="text-zinc-300 w-4 text-right">{driver.race2Points}</span>
+              <span className="text-zinc-400">Current</span>
+              <span className="text-zinc-300 w-4 text-right">{currentRacePoints}</span>
             </div>
           </div>
           
-          <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
-            <div className="text-[10px] text-zinc-400">TOTAL</div>
-            <div className="text-lg font-bold text-zinc-100">{totalPoints}</div>
+          <div className="flex items-center space-x-2">
+            <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
+              <div className="text-[10px] text-zinc-400">WEEKEND</div>
+              <div className="text-lg font-bold text-zinc-100">{weekendPoints}</div>
+            </div>
+            <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
+              <div className="text-[10px] text-zinc-400">TOTAL</div>
+              <div className="text-lg font-bold text-zinc-100">{totalPoints}</div>
+            </div>
           </div>
         </div>
       </div>

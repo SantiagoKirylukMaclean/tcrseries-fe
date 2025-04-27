@@ -12,7 +12,9 @@ interface Driver {
   surname: string
   teamColors: TeamColors
   championshipPoints: number
-  weekendPoints: number
+  qualyPoints: number
+  race1Points: number
+  race2Points: number
 }
 
 interface ChampionshipItemProps {
@@ -20,7 +22,8 @@ interface ChampionshipItemProps {
 }
 
 export function ChampionshipItem({ driver }: ChampionshipItemProps) {
-  const totalPoints = driver.championshipPoints + driver.weekendPoints
+  const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points
+  const totalPoints = driver.championshipPoints + weekendPoints
 
   return (
     <div className="flex h-[70px] bg-zinc-950">
@@ -54,7 +57,7 @@ export function ChampionshipItem({ driver }: ChampionshipItemProps) {
             </div>
             <div className="flex justify-end gap-3">
               <span className="text-zinc-400">Weekend</span>
-              <span className="text-zinc-300 w-4 text-right">{driver.weekendPoints}</span>
+              <span className="text-zinc-300 w-4 text-right">{weekendPoints}</span>
             </div>
           </div>
           

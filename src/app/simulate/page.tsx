@@ -247,7 +247,10 @@ export default function SimulatePage() {
             <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
               {drivers.map((driver, index) => (
                 <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
-                  <FutureRaceItem driver={driver} />
+                  <FutureRaceItem driver={{
+                    ...driver,
+                    currentRacePosition: driver.position
+                  }} />
                 </div>
               ))}
             </div>
