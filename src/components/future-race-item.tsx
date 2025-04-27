@@ -65,10 +65,27 @@ function WeightIndicator({ weight }: { weight: number }) {
   )
 }
 
+function getWeightByPosition(position: number): number {
+  switch (position) {
+    case 1:
+      return 40
+    case 2:
+    case 3:
+      return 30
+    case 4:
+      return 20
+    case 5:
+      return 10
+    default:
+      return 0
+  }
+}
+
 export function FutureRaceItem({ driver }: FutureRaceItemProps) {
   const currentRacePoints = RACE_POINTS[driver.currentRacePosition] || 0
   const weekendPoints = driver.qualyPoints + driver.race1Points + (driver.race2Points || 0) + currentRacePoints
   const totalPoints = driver.championshipPoints + weekendPoints
+  const weight = getWeightByPosition(driver.currentRacePosition)
 
   return (
     <div className="flex h-[70px] bg-background">
@@ -95,7 +112,7 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
         </div>
 
         <div className="mr-10">
-          <WeightIndicator weight={driver.weight} />
+          <WeightIndicator weight={weight} />
         </div>
 
         <div className="flex items-center space-x-6">
@@ -124,10 +141,6 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
             <div className="flex flex-col items-center justify-center w-14 h-14 bg-card">
               <div className="text-[10px] text-muted-foreground">WEEKEND</div>
               <div className="text-lg font-bold text-foreground">{weekendPoints}</div>
-            </div>
-            <div className="flex flex-col items-center justify-center w-14 h-14 bg-card">
-              <div className="text-[10px] text-muted-foreground">TOTAL</div>
-              <div className="text-lg font-bold text-foreground">{totalPoints}</div>
             </div>
           </div>
         </div>
