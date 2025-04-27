@@ -71,7 +71,7 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
   const totalPoints = driver.championshipPoints + weekendPoints
 
   return (
-    <div className="flex h-[70px] bg-zinc-950">
+    <div className="flex h-[70px] bg-background">
       <div className="flex flex-col w-[12px] py-2 ml-3">
         <div
           className="flex-1"
@@ -89,7 +89,7 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
       
       <div className="flex flex-1 items-center px-3">
         <div className="flex-1">
-          <div className="font-medium text-sm text-zinc-100">
+          <div className="font-medium text-sm text-foreground">
             {driver.name[0]}. {driver.surname}
           </div>
         </div>
@@ -101,33 +101,33 @@ export function FutureRaceItem({ driver }: FutureRaceItemProps) {
         <div className="flex items-center space-x-6">
           <div className="space-y-0.5 text-[11px]">
             <div className="flex justify-end gap-3">
-              <span className="text-zinc-400">Qualy</span>
-              <span className="text-zinc-300 w-4 text-right">{driver.qualyPoints}</span>
+              <span className="text-muted-foreground">Qualy</span>
+              <span className="text-foreground w-4 text-right">{driver.qualyPoints}</span>
             </div>
             <div className="flex justify-end gap-3">
-              <span className="text-zinc-400">Race 1</span>
-              <span className="text-zinc-300 w-4 text-right">{driver.race1Points}</span>
+              <span className="text-muted-foreground">Race 1</span>
+              <span className="text-foreground w-4 text-right">{driver.race1Points}</span>
             </div>
             {driver.race2Points !== undefined && (
               <div className="flex justify-end gap-3">
-                <span className="text-zinc-400">Race 2</span>
-                <span className="text-zinc-300 w-4 text-right">{driver.race2Points}</span>
+                <span className="text-muted-foreground">Race 2</span>
+                <span className="text-foreground w-4 text-right">{driver.race2Points}</span>
               </div>
             )}
             <div className="flex justify-end gap-3">
-              <span className="text-zinc-400">Current</span>
-              <span className="text-zinc-300 w-4 text-right">{currentRacePoints}</span>
+              <span className="text-muted-foreground">Current</span>
+              <span className="text-foreground w-4 text-right">{currentRacePoints}</span>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
-              <div className="text-[10px] text-zinc-400">WEEKEND</div>
-              <div className="text-lg font-bold text-zinc-100">{weekendPoints}</div>
+            <div className="flex flex-col items-center justify-center w-14 h-14 bg-card">
+              <div className="text-[10px] text-muted-foreground">WEEKEND</div>
+              <div className="text-lg font-bold text-foreground">{weekendPoints}</div>
             </div>
-            <div className="flex flex-col items-center justify-center w-14 h-14 bg-zinc-900">
-              <div className="text-[10px] text-zinc-400">TOTAL</div>
-              <div className="text-lg font-bold text-zinc-100">{totalPoints}</div>
+            <div className="flex flex-col items-center justify-center w-14 h-14 bg-card">
+              <div className="text-[10px] text-muted-foreground">TOTAL</div>
+              <div className="text-lg font-bold text-foreground">{totalPoints}</div>
             </div>
           </div>
         </div>

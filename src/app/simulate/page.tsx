@@ -244,9 +244,9 @@ export default function SimulatePage() {
         <div className="flex-1 grid grid-cols-2 gap-12">
           <div className="min-w-[320px]">
             <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
-            <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+            <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
               {drivers.map((driver, index) => (
-                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
                   <FutureRaceItem driver={{
                     ...driver,
                     currentRacePosition: driver.position
@@ -258,9 +258,9 @@ export default function SimulatePage() {
 
           <div className="min-w-[320px]">
             <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
-            <div className="rounded-lg overflow-hidden border-[0.5px] border-white">
+            <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
               {drivers.map((driver, index) => (
-                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-white/30">
+                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
                   <ChampionshipItem driver={driver} />
                 </div>
               ))}
