@@ -63,7 +63,7 @@ function WeightIndicator({ weight }: { weight: number }) {
   return (
     <div className="flex flex-col space-y-0.5">
       {getCircles().map((circle, index) => (
-        <div key={index}>{circle}</div>
+        <div key={`circle-${index}`}>{circle}</div>
       ))}
     </div>
   )

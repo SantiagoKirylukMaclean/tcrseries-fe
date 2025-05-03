@@ -188,8 +188,6 @@ const initialDrivers = [
 
 function SortableFutureRaceItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
   const {
-    attributes,
-    listeners,
     setNodeRef,
     transform,
     transition,
@@ -216,8 +214,6 @@ function SortableFutureRaceItem({ driver, index, oldIndex }: { driver: Driver, i
 
 function SortableChampionshipItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
   const {
-    attributes,
-    listeners,
     setNodeRef,
     transform,
     transition,
