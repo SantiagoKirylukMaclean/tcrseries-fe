@@ -50,9 +50,13 @@ function WeightIndicator({ weight }: { weight: number }) {
           <CircleDashed className="h-3 w-3" />
         ]
       case 40:
-        return Array(4).fill(<Circle className="h-3 w-3 fill-current" />)
+        return Array(4).fill(null).map((_, index) => (
+          <Circle key={index} className="h-3 w-3 fill-current" />
+        ))
       default:
-        return Array(4).fill(<CircleDashed className="h-3 w-3" />)
+        return Array(4).fill(null).map((_, index) => (
+          <CircleDashed key={index} className="h-3 w-3" />
+        ))
     }
   }
 
@@ -84,7 +88,6 @@ function getWeightByPosition(position: number): number {
 export function FutureRaceItem({ driver }: FutureRaceItemProps) {
   const currentRacePoints = RACE_POINTS[driver.currentRacePosition] || 0
   const weekendPoints = driver.qualyPoints + driver.race1Points + (driver.race2Points || 0) + currentRacePoints
-  const totalPoints = driver.championshipPoints + weekendPoints
   const weight = getWeightByPosition(driver.currentRacePosition)
 
   return (

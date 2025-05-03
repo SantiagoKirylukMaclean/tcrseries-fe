@@ -44,9 +44,13 @@ function WeightIndicator({ weight }: { weight: number }) {
           <CircleDashed className="h-4 w-4" />
         ]
       case 40:
-        return Array(4).fill(<Circle className="h-4 w-4 fill-current" />)
+        return Array(4).fill(null).map((_, index) => (
+          <Circle key={index} className="h-4 w-4 fill-current" />
+        ))
       default:
-        return Array(4).fill(<CircleDashed className="h-4 w-4" />)
+        return Array(4).fill(null).map((_, index) => (
+          <CircleDashed key={index} className="h-4 w-4" />
+        ))
     }
   }
 

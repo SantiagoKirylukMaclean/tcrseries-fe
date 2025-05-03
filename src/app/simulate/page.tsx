@@ -8,6 +8,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragEndEvent,
 } from "@dnd-kit/core"
 import {
   arrayMove,
@@ -18,6 +19,9 @@ import {
 import { DriverItem } from "@/components/driver-item"
 import { FutureRaceItem } from "@/components/future-race-item"
 import { ChampionshipItem } from "@/components/championship-item"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+import { Driver } from "@/types/driver"
 
 const initialDrivers = [
   {
@@ -182,8 +186,62 @@ const initialDrivers = [
   },
 ]
 
+function SortableFutureRaceItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: driver.id })
+
+  const positionDiff = Math.abs(index - oldIndex)
+  const delay = positionDiff * 2 // 2 seconds delay per position
+  const duration = 1000 // 1 second duration for each movement
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: transition ? `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}s` : undefined,
+  }
+
+  return (
+    <div ref={setNodeRef} style={style} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
+      <FutureRaceItem driver={{
+        ...driver,
+        currentRacePosition: driver.position
+      }} />
+    </div>
+  )
+}
+
+function SortableChampionshipItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: driver.id })
+
+  const positionDiff = Math.abs(index - oldIndex)
+  const delay = positionDiff * 2 // 2 seconds delay per position
+  const duration = 1000 // 1 second duration for each movement
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: transition ? `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}s` : undefined,
+  }
+
+  return (
+    <div ref={setNodeRef} style={style} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
+      <ChampionshipItem driver={driver} />
+    </div>
+  )
+}
+
 export default function SimulatePage() {
   const [drivers, setDrivers] = useState(initialDrivers)
+  const [oldPositions, setOldPositions] = useState<{[key: string]: number}>({})
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -192,21 +250,28 @@ export default function SimulatePage() {
     })
   )
 
-  function handleDragEnd(event: any) {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
 
-    if (active.id !== over.id) {
-      setDrivers((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id)
-        const newIndex = items.findIndex((item) => item.id === over.id)
+    if (!over || active.id === over.id) return
 
-        const newItems = arrayMove(items, oldIndex, newIndex)
-        return newItems.map((item, index) => ({
-          ...item,
-          position: index + 1,
-        }))
-      })
-    }
+    // Guardar las posiciones actuales antes de actualizar
+    const currentPositions = drivers.reduce((acc, driver, index) => {
+      acc[driver.id] = index
+      return acc
+    }, {} as {[key: string]: number})
+    setOldPositions(currentPositions)
+
+    setDrivers((items) => {
+      const oldIndex = items.findIndex((item) => item.id === active.id)
+      const newIndex = items.findIndex((item) => item.id === over.id)
+
+      const newItems = arrayMove(items, oldIndex, newIndex)
+      return newItems.map((item, index) => ({
+        ...item,
+        position: index + 1,
+      }))
+    })
   }
 
   return (
@@ -245,25 +310,38 @@ export default function SimulatePage() {
           <div className="min-w-[320px]">
             <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
             <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
-              {drivers.map((driver, index) => (
-                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
-                  <FutureRaceItem driver={{
-                    ...driver,
-                    currentRacePosition: driver.position
-                  }} />
-                </div>
-              ))}
+              <SortableContext
+                items={drivers.map((d) => d.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {drivers.map((driver, index) => (
+                  <SortableFutureRaceItem 
+                    key={driver.id} 
+                    driver={driver} 
+                    index={index}
+                    oldIndex={oldPositions[driver.id] || index}
+                  />
+                ))}
+              </SortableContext>
             </div>
           </div>
 
           <div className="min-w-[320px]">
             <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
             <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
-              {drivers.map((driver, index) => (
-                <div key={driver.id} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
-                  <ChampionshipItem driver={driver} />
-                </div>
-              ))}
+              <SortableContext
+                items={drivers.map((d) => d.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {drivers.map((driver, index) => (
+                  <SortableChampionshipItem 
+                    key={driver.id} 
+                    driver={driver} 
+                    index={index}
+                    oldIndex={oldPositions[driver.id] || index}
+                  />
+                ))}
+              </SortableContext>
             </div>
           </div>
         </div>
