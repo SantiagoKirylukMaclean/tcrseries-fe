@@ -69,7 +69,7 @@ const initialDrivers = [
     surname: "Björk",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 8,
+    qualyPoints: 0,
     race1Points: 30, // 1 en la lista (posición 1) => 30
     race2Points: 0,
     championshipPoints: 0,
@@ -81,7 +81,7 @@ const initialDrivers = [
     surname: "Urrutia",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 4,
+    qualyPoints: 0,
     race1Points: 25, // 2 en la lista (posición 2) => 25
     race2Points: 0,
     championshipPoints: 0,
@@ -93,7 +93,7 @@ const initialDrivers = [
     surname: "Ehrlacher",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 10,
+    qualyPoints: 0,
     race1Points: 22, // 3 en la lista (posición 3) => 22
     race2Points: 0,
     championshipPoints: 0,
@@ -118,7 +118,7 @@ const initialDrivers = [
     surname: "Montenegro",
     teamColors: { primary: "#FF69B4", secondary: "#00BFFF", tertiary: "#FFD700" },
     weight: 0,
-    qualyPoints: 6,
+    qualyPoints: 0,
     race1Points: 0, // No está en la lista => 0
     race2Points: 0,
     championshipPoints: 0,
@@ -130,7 +130,7 @@ const initialDrivers = [
     surname: "Guerrieri",
     teamColors: { primary: "#FF69B4", secondary: "#00BFFF", tertiary: "#FFD700" },
     weight: 0,
-    qualyPoints: 15,
+    qualyPoints: 0,
     race1Points: 20, // 4 en la lista (posición 4) => 20
     race2Points: 0,
     championshipPoints: 0,
@@ -155,7 +155,7 @@ const initialDrivers = [
     surname: "Comte",
     teamColors: { primary: "#8B0000", secondary: "#FFA500", tertiary: "#4682B4" },
     weight: 0,
-    qualyPoints: 6,
+    qualyPoints: 0,
     race1Points: 18, // 5 en la lista (posición 5) => 18
     race2Points: 0,
     championshipPoints: 0,
@@ -403,6 +403,22 @@ export default function SimulatePage() {
     })
   }
 
+  // Ordenar para Weights - Future Race
+  const driversByWeekend = [...drivers].sort((a, b) => {
+    const aWeekend = a.qualyPoints + a.race1Points + a.race2Points;
+    const bWeekend = b.qualyPoints + b.race1Points + b.race2Points;
+    return bWeekend - aWeekend;
+  });
+
+  // Ordenar para Championship
+  const driversByTotal = [...drivers].sort((a, b) => {
+    const aWeekend = a.qualyPoints + a.race1Points + a.race2Points;
+    const bWeekend = b.qualyPoints + b.race1Points + b.race2Points;
+    const aTotal = a.championshipPoints + aWeekend;
+    const bTotal = b.championshipPoints + bWeekend;
+    return bTotal - aTotal;
+  });
+
   return (
     <div className="space-y-8">
       <div>
@@ -440,10 +456,10 @@ export default function SimulatePage() {
             <h2 className="text-xl font-semibold mb-4 text-center">Weights - Future Race</h2>
             <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
               <SortableContext
-                items={drivers.map((d) => d.id)}
+                items={driversByWeekend.map((d) => d.id)}
                 strategy={verticalListSortingStrategy}
               >
-                {drivers.map((driver, index) => (
+                {driversByWeekend.map((driver, index) => (
                   <SortableFutureRaceItem 
                     key={driver.id} 
                     driver={driver} 
@@ -459,10 +475,10 @@ export default function SimulatePage() {
             <h2 className="text-xl font-semibold mb-4 text-center">Championship</h2>
             <div className="rounded-lg overflow-hidden border-[0.5px] border-border">
               <SortableContext
-                items={drivers.map((d) => d.id)}
+                items={driversByTotal.map((d) => d.id)}
                 strategy={verticalListSortingStrategy}
               >
-                {drivers.map((driver, index) => (
+                {driversByTotal.map((driver, index) => (
                   <SortableChampionshipItem 
                     key={driver.id} 
                     driver={driver} 
