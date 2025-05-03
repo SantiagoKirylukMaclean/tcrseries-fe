@@ -34,8 +34,8 @@ const initialDrivers = [
     teamColors: { primary: "#1E90FF", secondary: "#FFD700", tertiary: "#FF4500" },
     weight: 0,
     qualyPoints: 0,
-    race1Points: 0, // 18 en la lista (posición 18) => 0
-    race2Points: 0,
+    race1Points: 3, // 18 en la lista (posición 18) => 0
+    race2Points: 3,
     championshipPoints: 0,
   },
   {
@@ -47,7 +47,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 8, // 10 en la lista (posición 10) => 8
-    race2Points: 0,
+    race2Points: 4,
     championshipPoints: 0,
   },
   {
@@ -72,7 +72,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 8,
     race1Points: 30, // 1 en la lista (posición 1) => 30
-    race2Points: 18,
+    race2Points: 20,
     championshipPoints: 0,
   },
   {
@@ -84,7 +84,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 4,
     race1Points: 25, // 2 en la lista (posición 2) => 25
-    race2Points: 16,
+    race2Points: 18,
     championshipPoints: 0,
   },
   {
@@ -108,7 +108,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 16, // 6 en la lista (posición 6) => 16
-    race2Points: 20,
+    race2Points: 16,
     championshipPoints: 0,
   },
   // Grupo: Montenegro, Guerrieri
