@@ -320,6 +320,14 @@ const initialDrivers = [
   },
 ];
 
+// Ordenar descendente por la suma de qualyPoints + race1Points + race2Points solo al cargar la página
+const sortedInitialDrivers = [...initialDrivers]
+  .sort((a, b) => (b.qualyPoints + b.race1Points + b.race2Points) - (a.qualyPoints + a.race1Points + a.race2Points))
+  .map((driver, idx) => ({
+    ...driver,
+    position: idx + 1,
+  }));
+
 function SortableFutureRaceItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
   const {
     setNodeRef,
@@ -370,7 +378,7 @@ function SortableChampionshipItem({ driver, index, oldIndex }: { driver: Driver,
 }
 
 export default function SimulatePage() {
-  const [drivers, setDrivers] = useState(initialDrivers)
+  const [drivers, setDrivers] = useState(sortedInitialDrivers)
   const [oldPositions, setOldPositions] = useState<{[key: string]: number}>({})
 
   const sensors = useSensors(
@@ -408,7 +416,7 @@ export default function SimulatePage() {
   const driversWithCalculatedPoints = drivers.map((driver, idx) => {
     const currentRacePosition = idx + 1;
     const currentRacePoints = RACE_POINTS[currentRacePosition] || 0;
-    const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points + currentRacePoints;
+    const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points;
     const totalPoints = driver.championshipPoints + weekendPoints;
     return {
       ...driver,
@@ -419,10 +427,15 @@ export default function SimulatePage() {
     };
   });
 
-  // Ordenar para Weights - Future Race
-  const driversByWeekend = [...driversWithCalculatedPoints].sort((a, b) => b.weekendPoints - a.weekendPoints);
+  // Ordenar para Weights - Future Race (incluye currentRacePoints)
+  const driversByWeekend = [...driversWithCalculatedPoints].sort((a, b) => {
+    // Para Weights - Future Race, weekend incluye currentRacePoints
+    const aWeekend = a.qualyPoints + a.race1Points + a.race2Points + a.currentRacePoints;
+    const bWeekend = b.qualyPoints + b.race1Points + b.race2Points + b.currentRacePoints;
+    return bWeekend - aWeekend;
+  });
 
-  // Ordenar para Championship
+  // Ordenar para Championship (solo suma de qualy, race1 y race2)
   const driversByTotal = [...driversWithCalculatedPoints].sort((a, b) => b.totalPoints - a.totalPoints);
 
   return (
