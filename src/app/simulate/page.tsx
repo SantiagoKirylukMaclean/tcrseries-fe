@@ -344,17 +344,38 @@ function SortableFutureRaceItem({ driver, index, oldIndex }: { driver: Driver, i
     transition: transition ? `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}s` : undefined,
   }
 
+  // Calcular el weight según el índice visual en la tabla
+  let weight = 0;
+  switch (index) {
+    case 0:
+      weight = 40;
+      break;
+    case 1:
+    case 2:
+      weight = 30;
+      break;
+    case 3:
+      weight = 20;
+      break;
+    case 4:
+      weight = 10;
+      break;
+    default:
+      weight = 0;
+  }
+
   return (
     <div ref={setNodeRef} style={style} className="[&:not(:last-child)]:border-b-[0.5px] [&:not(:last-child)]:border-border">
       <FutureRaceItem driver={{
         ...driver,
-        currentRacePosition: driver.position
+        currentRacePosition: driver.position,
+        weight,
       }} />
     </div>
   )
 }
 
-function SortableChampionshipItem({ driver, index, oldIndex }: { driver: Driver, index: number, oldIndex: number }) {
+function SortableChampionshipItem({ driver, index, oldIndex }: { driver: Driver & { weekendPoints?: number, totalPoints?: number }, index: number, oldIndex: number }) {
   const {
     setNodeRef,
     transform,
