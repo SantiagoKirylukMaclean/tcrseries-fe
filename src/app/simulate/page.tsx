@@ -70,7 +70,7 @@ const initialDrivers = [
     surname: "Björk",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 8,
     race1Points: 30, // 1 en la lista (posición 1) => 30
     race2Points: 0,
     championshipPoints: 0,
@@ -82,7 +82,7 @@ const initialDrivers = [
     surname: "Urrutia",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 4,
     race1Points: 25, // 2 en la lista (posición 2) => 25
     race2Points: 0,
     championshipPoints: 0,
@@ -94,7 +94,7 @@ const initialDrivers = [
     surname: "Ehrlacher",
     teamColors: { primary: "#228B22", secondary: "#00CED1", tertiary: "#8A2BE2" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 10,
     race1Points: 22, // 3 en la lista (posición 3) => 22
     race2Points: 0,
     championshipPoints: 0,
@@ -119,7 +119,7 @@ const initialDrivers = [
     surname: "Montenegro",
     teamColors: { primary: "#FF69B4", secondary: "#00BFFF", tertiary: "#FFD700" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 6,
     race1Points: 0, // No está en la lista => 0
     race2Points: 0,
     championshipPoints: 0,
@@ -131,7 +131,7 @@ const initialDrivers = [
     surname: "Guerrieri",
     teamColors: { primary: "#FF69B4", secondary: "#00BFFF", tertiary: "#FFD700" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 15,
     race1Points: 20, // 4 en la lista (posición 4) => 20
     race2Points: 0,
     championshipPoints: 0,
@@ -156,7 +156,7 @@ const initialDrivers = [
     surname: "Comte",
     teamColors: { primary: "#8B0000", secondary: "#FFA500", tertiary: "#4682B4" },
     weight: 0,
-    qualyPoints: 0,
+    qualyPoints: 2,
     race1Points: 18, // 5 en la lista (posición 5) => 18
     race2Points: 0,
     championshipPoints: 0,
