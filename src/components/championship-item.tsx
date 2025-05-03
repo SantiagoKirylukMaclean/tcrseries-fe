@@ -15,6 +15,8 @@ interface Driver {
   qualyPoints: number
   race1Points: number
   race2Points: number
+  weekendPoints?: number
+  totalPoints?: number
 }
 
 interface ChampionshipItemProps {
@@ -22,8 +24,8 @@ interface ChampionshipItemProps {
 }
 
 export function ChampionshipItem({ driver }: ChampionshipItemProps) {
-  const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points
-  const totalPoints = driver.championshipPoints + weekendPoints
+  const weekendPoints = driver.weekendPoints ?? (driver.qualyPoints + driver.race1Points + driver.race2Points)
+  const totalPoints = driver.totalPoints ?? (driver.championshipPoints + weekendPoints)
 
   return (
     <div className="flex h-[70px] bg-background">

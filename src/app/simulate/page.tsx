@@ -22,6 +22,7 @@ import { ChampionshipItem } from "@/components/championship-item"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Driver } from "@/types/driver"
+import { RACE_POINTS } from "@/constants/points"
 
 const initialDrivers = [
   // Grupo: Michelisz, Azcona, Girolami
@@ -403,21 +404,26 @@ export default function SimulatePage() {
     })
   }
 
-  // Ordenar para Weights - Future Race
-  const driversByWeekend = [...drivers].sort((a, b) => {
-    const aWeekend = a.qualyPoints + a.race1Points + a.race2Points;
-    const bWeekend = b.qualyPoints + b.race1Points + b.race2Points;
-    return bWeekend - aWeekend;
+  // Calcular currentRacePoints, weekendPoints y totalPoints para cada piloto
+  const driversWithCalculatedPoints = drivers.map((driver, idx) => {
+    const currentRacePosition = idx + 1;
+    const currentRacePoints = RACE_POINTS[currentRacePosition] || 0;
+    const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points + currentRacePoints;
+    const totalPoints = driver.championshipPoints + weekendPoints;
+    return {
+      ...driver,
+      currentRacePosition,
+      currentRacePoints,
+      weekendPoints,
+      totalPoints,
+    };
   });
 
+  // Ordenar para Weights - Future Race
+  const driversByWeekend = [...driversWithCalculatedPoints].sort((a, b) => b.weekendPoints - a.weekendPoints);
+
   // Ordenar para Championship
-  const driversByTotal = [...drivers].sort((a, b) => {
-    const aWeekend = a.qualyPoints + a.race1Points + a.race2Points;
-    const bWeekend = b.qualyPoints + b.race1Points + b.race2Points;
-    const aTotal = a.championshipPoints + aWeekend;
-    const bTotal = b.championshipPoints + bWeekend;
-    return bTotal - aTotal;
-  });
+  const driversByTotal = [...driversWithCalculatedPoints].sort((a, b) => b.totalPoints - a.totalPoints);
 
   return (
     <div className="space-y-8">
