@@ -24,32 +24,38 @@ function WeightIndicator({ weight }: { weight: number }) {
   const getCircles = () => {
     switch (weight) {
       case 0:
-        return Array(4).fill(<CircleDashed className="h-4 w-4" />)
+        return Array(4).fill(null).map((_, index) => (
+          <CircleDashed key={`dashed-${index}`} className="h-4 w-4" />
+        ))
       case 10:
         return [
-          <Circle key="1" className="h-4 w-4 fill-current" />,
-          ...Array(3).fill(<CircleDashed className="h-4 w-4" />)
+          <Circle key="circle-1" className="h-4 w-4 fill-current" />,
+          ...Array(3).fill(null).map((_, index) => (
+            <CircleDashed key={`dashed-${index}`} className="h-4 w-4" />
+          ))
         ]
       case 20:
         return [
-          <Circle key="1" className="h-4 w-4 fill-current" />,
-          <Circle key="2" className="h-4 w-4 fill-current" />,
-          ...Array(2).fill(<CircleDashed className="h-4 w-4" />)
+          <Circle key="circle-1" className="h-4 w-4 fill-current" />,
+          <Circle key="circle-2" className="h-4 w-4 fill-current" />,
+          ...Array(2).fill(null).map((_, index) => (
+            <CircleDashed key={`dashed-${index}`} className="h-4 w-4" />
+          ))
         ]
       case 30:
         return [
-          <Circle key="1" className="h-4 w-4 fill-current" />,
-          <Circle key="2" className="h-4 w-4 fill-current" />,
-          <Circle key="3" className="h-4 w-4 fill-current" />,
-          <CircleDashed className="h-4 w-4" />
+          <Circle key="circle-1" className="h-4 w-4 fill-current" />,
+          <Circle key="circle-2" className="h-4 w-4 fill-current" />,
+          <Circle key="circle-3" className="h-4 w-4 fill-current" />,
+          <CircleDashed key="dashed-1" className="h-4 w-4" />
         ]
       case 40:
         return Array(4).fill(null).map((_, index) => (
-          <Circle key={index} className="h-4 w-4 fill-current" />
+          <Circle key={`circle-${index}`} className="h-4 w-4 fill-current" />
         ))
       default:
         return Array(4).fill(null).map((_, index) => (
-          <CircleDashed key={index} className="h-4 w-4" />
+          <CircleDashed key={`dashed-${index}`} className="h-4 w-4" />
         ))
     }
   }
