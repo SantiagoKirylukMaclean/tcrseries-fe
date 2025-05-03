@@ -416,7 +416,8 @@ export default function SimulatePage() {
   const driversWithCalculatedPoints = drivers.map((driver, idx) => {
     const currentRacePosition = idx + 1;
     const currentRacePoints = RACE_POINTS[currentRacePosition] || 0;
-    const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points;
+    // weekendPoints incluye currentRacePoints
+    const weekendPoints = driver.qualyPoints + driver.race1Points + driver.race2Points + currentRacePoints;
     const totalPoints = driver.championshipPoints + weekendPoints;
     return {
       ...driver,
