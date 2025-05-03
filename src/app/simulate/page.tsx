@@ -59,7 +59,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 6, // 11 en la lista (posición 11) => 6
-    race2Points: 0,
+    race2Points: 6,
     championshipPoints: 0,
   },
   // Grupo: Björk, Urrutia, Ehrlacher, Ma
@@ -72,7 +72,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 8,
     race1Points: 30, // 1 en la lista (posición 1) => 30
-    race2Points: 0,
+    race2Points: 18,
     championshipPoints: 0,
   },
   {
@@ -84,7 +84,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 4,
     race1Points: 25, // 2 en la lista (posición 2) => 25
-    race2Points: 0,
+    race2Points: 16,
     championshipPoints: 0,
   },
   {
@@ -96,7 +96,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 10,
     race1Points: 22, // 3 en la lista (posición 3) => 22
-    race2Points: 0,
+    race2Points: 25,
     championshipPoints: 0,
   },
   {
@@ -108,7 +108,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 16, // 6 en la lista (posición 6) => 16
-    race2Points: 0,
+    race2Points: 20,
     championshipPoints: 0,
   },
   // Grupo: Montenegro, Guerrieri
@@ -121,7 +121,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 6,
     race1Points: 0, // No está en la lista => 0
-    race2Points: 0,
+    race2Points: 14,
     championshipPoints: 0,
   },
   {
@@ -133,7 +133,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 15,
     race1Points: 20, // 4 en la lista (posición 4) => 20
-    race2Points: 0,
+    race2Points: 30,
     championshipPoints: 0,
   },
   // Grupo: Filippi, Comte
@@ -146,7 +146,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 4, // 12 en la lista (posición 12) => 4
-    race2Points: 0,
+    race2Points: 8,
     championshipPoints: 0,
   },
   {
@@ -158,7 +158,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 2,
     race1Points: 18, // 5 en la lista (posición 5) => 18
-    race2Points: 0,
+    race2Points: 22,
     championshipPoints: 0,
   },
   // Resto de pilotos (colores aleatorios)
@@ -183,7 +183,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 0, // 16 en la lista (posición 16) => 0
-    race2Points: 0,
+    race2Points: 4,
     championshipPoints: 0,
   },
   {
@@ -207,7 +207,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 0, // 20 en la lista (posición 20) => 0
-    race2Points: 0,
+    race2Points: 1,
     championshipPoints: 0,
   },
   {
@@ -219,7 +219,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 12, // 8 en la lista (posición 8) => 12
-    race2Points: 0,
+    race2Points: 12,
     championshipPoints: 0,
   },
   {
@@ -243,7 +243,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 3, // 13 en la lista (posición 13) => 3
-    race2Points: 0,
+    race2Points: 3,
     championshipPoints: 0,
   },
   {
@@ -303,7 +303,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 10, // 9 en la lista (posición 9) => 10
-    race2Points: 0,
+    race2Points: 10,
     championshipPoints: 0,
   },
   {
@@ -315,7 +315,7 @@ const initialDrivers = [
     weight: 0,
     qualyPoints: 0,
     race1Points: 2, // 14 en la lista (posición 14) => 2
-    race2Points: 0,
+    race2Points: 2,
     championshipPoints: 0,
   },
 ];
