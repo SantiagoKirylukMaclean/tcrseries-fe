@@ -26,7 +26,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
     try {
       await login(email, password)
       onOpenChange(false)
-    } catch (error) {
+    } catch {
       setError("Email/Usuario o contraseña incorrectos")
     } finally {
       setIsLoading(false)
