@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { 
   BarChart3, 
@@ -7,8 +9,11 @@ import {
   Car, 
   FileText 
 } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
 
 export default function Home() {
+  const { isAuthenticated } = useAuth()
+
   const links = [
     {
       title: "Stadings",
@@ -47,9 +52,16 @@ export default function Home() {
       {links.map((link, index) => (
         <Link
           key={link.href}
-          href={link.href}
-          className="p-6 bg-card hover:bg-accent rounded-lg border shadow-sm transition-colors flex items-center space-x-4 animate-fade-in"
+          href={isAuthenticated ? link.href : "#"}
+          className={`p-6 bg-card hover:bg-accent rounded-lg border shadow-sm transition-colors flex items-center space-x-4 animate-fade-in ${
+            !isAuthenticated ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           style={{ animationDelay: `${index * 100}ms` }}
+          onClick={(e) => {
+            if (!isAuthenticated) {
+              e.preventDefault()
+            }
+          }}
         >
           <link.icon className="h-6 w-6" />
           <span className="font-medium">{link.title}</span>

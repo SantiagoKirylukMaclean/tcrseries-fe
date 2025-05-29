@@ -4,11 +4,13 @@ import { useState } from "react"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
 import { Button } from "./ui/button"
-import { UserCircle } from "lucide-react"
+import { UserCircle, LogOut } from "lucide-react"
 import { LoginDialog } from "./login-dialog"
+import { useAuth } from "@/contexts/auth-context"
 
 export default function Header() {
   const [showLoginDialog, setShowLoginDialog] = useState(false)
+  const { isAuthenticated, logout } = useAuth()
 
   return (
     <header className="border-b">
@@ -18,13 +20,23 @@ export default function Header() {
         </Link>
         <div className="flex items-center space-x-4">
           <ModeToggle />
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => setShowLoginDialog(true)}
-          >
-            <UserCircle className="h-5 w-5" />
-          </Button>
+          {isAuthenticated ? (
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={logout}
+            >
+              <LogOut className="h-5 w-5" />
+            </Button>
+          ) : (
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setShowLoginDialog(true)}
+            >
+              <UserCircle className="h-5 w-5" />
+            </Button>
+          )}
         </div>
       </div>
 
