@@ -29,6 +29,32 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Environment Configuration
+
+This project uses environment variables to configure the API URL based on the environment:
+
+- In local development, the API URL defaults to `http://localhost:8080/api`
+- In production, the API URL is set using the `NEXT_PUBLIC_API_URL` environment variable
+
+### Local Development
+
+For local development, you can create a `.env.local` file in the root directory with the following content:
+
+```bash
+# Uncomment and modify if you need to override the default localhost URL
+# NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
+
+### Production Deployment
+
+When deploying to Vercel or another hosting platform, set the `NEXT_PUBLIC_API_URL` environment variable to your production API URL.
+
+In Vercel, you can set environment variables in the project settings:
+
+1. Go to your project in the Vercel dashboard
+2. Navigate to Settings > Environment Variables
+3. Add a new variable with the name `NEXT_PUBLIC_API_URL` and the value of your production API URL
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
